@@ -1,6 +1,6 @@
 #include "drink.h"
 
-// --- Drink ---
+// DRINK
 Drink::Drink() {
     cout << "[Drink] Створено базовий напій" << endl;
 }
@@ -13,7 +13,7 @@ void Drink::Describe() {
     cout << "Це просто якийсь напій..." << endl;
 }
 
-// --- Juice ---
+// JUICE
 Juice::Juice() {
     SetName("Сік");
     SetTemperature("холодний");
@@ -26,7 +26,7 @@ void Juice::Describe() {
     cout << "Це сік" << endl;
 }
 
-// --- Soda ---
+// SODA
 Soda::Soda() {
     SetName("Кола");
     SetTemperature("дуже холодна");
@@ -39,9 +39,9 @@ void Soda::Describe() {
     cout << "Це газована вода" << endl;
 }
 
-// --- FreshJuice ---
+// FRESH JUICE
 FreshJuice::FreshJuice(string f) {
-    SetFruit(f);
+    SetFruit(f);  // Задали фрукт
     cout << "[FreshJuice] Створено фреш зі смаком " << fruit << endl;
 }
 FreshJuice::FreshJuice() {
@@ -57,9 +57,11 @@ void FreshJuice::Describe() {
     cout << "Це фреш з " << fruit << endl;
 }
 
-// --- MultiJuice ---
+// MULTI JUICE
+// Наслідується від Juice, Soda, FreshJuice — всі вони мають базу Drink (віртуально)
 MultiJuice::MultiJuice(string fruit, string label)
-    : Drink(), Juice(), Soda(), FreshJuice(fruit) {
+    : Drink(), Juice(), Soda(), FreshJuice(fruit)  // Виклик базових конструкторів
+{
     mixLabel = label;
     cout << "[MultiJuice] Створено мікс: " << mixLabel << endl;
 }
@@ -67,5 +69,6 @@ MultiJuice::~MultiJuice() {
     cout << "[MultiJuice] Мікс '" << mixLabel << "' знищено" << endl;
 }
 void MultiJuice::Describe() {
+    // Вивід опису комбінованого напою
     cout << "Це мікс '" << mixLabel << "' — сік, фреш з " << fruit << " і газована вода!" << endl;
 }

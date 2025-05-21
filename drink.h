@@ -3,29 +3,30 @@
 #include <string>
 using namespace std;
 
-// 🔹 Базовий клас
+// Базовий клас, від якого успадковуються всі напої
 class Drink {
 protected:
-    string name;
-    string temperature;
+    string name;         // Назва напою
+    string temperature;  // Температура подачі
 
 public:
-    Drink();
-    virtual ~Drink();
+    Drink();              // Конструктор
+    virtual ~Drink();     // Віртуальний деструктор
 
-    void SetName(string n);
-    void SetTemperature(string t);
-    virtual void Describe();
+    void SetName(string n);         // Задати назву
+    void SetTemperature(string t);  // Задати температуру
+    virtual void Describe();        // Метод для опису напою
 };
 
-// 🔹 Похідні класи (всі — ВІРТУАЛЬНО від Drink)
+// Клас Juice, який ВІРТУАЛЬНО наслідує Drink
 class Juice : virtual public Drink {
 public:
-    Juice();
-    virtual ~Juice();
-    void Describe() override;
+    Juice();               // Конструктор
+    virtual ~Juice();      // Деструктор
+    void Describe() override; // Перевизначення Describe()
 };
 
+// Клас Soda — теж віртуальне наслідування від Drink
 class Soda : virtual public Drink {
 public:
     Soda();
@@ -33,25 +34,26 @@ public:
     void Describe() override;
 };
 
+// Клас FreshJuice — фреш із фруктом, віртуальне наслідування
 class FreshJuice : virtual public Drink {
 protected:
-    string fruit;
+    string fruit;  // Назва фрукта
 
 public:
-    FreshJuice(string f);
-    FreshJuice();
-    virtual ~FreshJuice();
+    FreshJuice(string f);   // Конструктор з параметром
+    FreshJuice();           // Порожній конструктор
+    virtual ~FreshJuice();  // Деструктор
     void SetFruit(string f);
     void Describe() override;
 };
 
-// 🔹 Клас із множинним наслідуванням
+// Клас MultiJuice — мікс, який успадковує ВСІ ТРИ інші класи
 class MultiJuice : public Juice, public Soda, public FreshJuice {
 private:
-    string mixLabel;
+    string mixLabel;  // Назва міксу
 
 public:
-    MultiJuice(string fruit, string label);
-    virtual ~MultiJuice();
+    MultiJuice(string fruit, string label); // Конструктор
+    virtual ~MultiJuice();                  // Деструктор
     void Describe() override;
 };
